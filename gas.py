@@ -7,7 +7,7 @@ CORS(gas)
 api=Api(gas)
 
 class testing(Resource):
-	def post(self):
+	def get(self):
 		nomor=request.form.get("nomor")
 		if not nomor:
 			return {
@@ -65,7 +65,7 @@ class testing(Resource):
 		pos=requests.post("https://api.myfave.com/api/fave/v3/auth",headers={'Host':'api.myfave.com','Connection':'keep-alive','Content-Length':'26','sec-ch-ua':'"Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"','x-user-agent':'Fave-PWA/v1.0.0','content-type':'application/json','sec-ch-ua-mobile':'?1','User-Agent':'Mozilla/5.0 (Linux; Android 11; CPH2325) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Mobile Safari/537.36','sec-ch-ua-platform':'"Android"','Accept':'*/*','Origin':'https://myfave.com','Sec-Fetch-Site':'same-site','Sec-Fetch-Mode':'cors','Sec-Fetch-Dest':'empty','Referer':'https://myfave.com/','Accept-Encoding':'gzip, deflate, br','Accept-Language':'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7'},data=json.dumps({"phone":"+62"+nomor})).text
 		# Diatas Call
 
-api.add_resource(testing,"/api/spam")
+api.add_resource(testing,"/api/spam", methods=["GET","POST"])
 
 if __name__=="__main__":
-    gas.run(debug=True)
+    gas.run(debug=True, port=5005)
